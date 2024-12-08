@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  mlo-mysql:
+    image: mysql:5.6
+    container_name: mlo-mysql
+    ports:
+      - 3316:3316
+    environment:
+      MYSQL_ROOT_PASSWORD: Root123456*
+      MYSQL_PASSWORD: root
+      MYSQL_TCP_PORT: 3316
+    restart: unless-stopped
+    volumes:
+      - ../../mysql/mlo/var/data/mysql:/var/lib/mysql
+      - ../../mysql/mlo/config/mysql:/etc/mysql
+      - ../../mysql/mlo/var/log/mysql:/var/log/mysql
+    hostname: mlo-mysql
+    networks:
+      mlo_network:
+
+networks:
+  shared_network:
+    external: true

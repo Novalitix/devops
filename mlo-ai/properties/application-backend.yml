@@ -1,0 +1,101 @@
+spring:
+  mail:
+    username: noreply@dimsoft.eu
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+            required: 'false'
+          auth: 'true'
+          connectiontimeout: '30000'
+          writetimeout: '30000'
+          timeout: '30000'
+    host: dimsoft.eu
+    password: 9#w8Z^3#h0xh
+    port: '587'
+  security:
+    oauth2:
+      client:
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/auth
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            token-uri: https://oauth2.googleapis.com/token
+            user-name-attribute: sub
+        registration:
+          google:
+            client-id: 293447594096-eniqo6778khf7oumikq1ak593vjci7a5.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: http://localhost:8075/login/oauth2/callback/google
+            scope: profile, email
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: 'true'
+  datasource:
+    password: Root123456*
+    url: jdbc:mysql://localhost:3316/mlo-db6?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
+mail:
+  mime:
+    charset: UTF-8
+app:
+  ressource_dir: /../FILES/
+  account:
+    frontend_home_url: /home
+    url_reset_password_prefix: /authentication/reset-password
+    profile_base_url: /profile
+    url_activation_prefix: /authentication/activate
+    site_base_url: http://localhost:57621/#/
+  bulk_sms_base_url: https://5care.fr/bulksms/api/v1.0/merchant/sendsms
+  mail:
+    sender_name: mlo
+  frontend_base_url: http://localhost:4200/#
+  bulk_sms_merchant_key: 2ef01e7a-b689-41a9-9fc7-6k3af0gg2024
+application:
+  security:
+    jwt:
+      expiration: '600000'
+      refresh-token:
+        expiration: '604800000'
+      secret-key: bc3d1c730bba015e73351257355245f1524860c1b9f4fe9d74351ed8a2883fcb
+stripe:
+  redirect:
+    success:
+      url: http://localhost:4200/#/souscription/paiement/success?paymentId={CHECKOUT_SESSION_ID}&transactionId=%s
+    cancel:
+      url: http://localhost:4200/#/souscription/paiement/cancel?paymentId={CHECKOUT_SESSION_ID}&transactionId=%s
+  api:
+    secretKey: sk_test_51PYpShKy3E39ND66ZvciQcmrgelrD4N7FJ9yYvEXLN8XxxkHuHRuwwon2RQnf1S5XcqOVXfQV9H1on0DcLK1KiXw000VBC0KVW
+    publicKey: pk_test_51PYpShKy3E39ND66IsUj4Zx72rLKC8DLUvILLo4kxr2LkV4Mtj2NcQtpaFDgqoBGt8PrdVd4zaWxdfoD1PnnplTR00deUgFSa0
+logging:
+  config: classpath:logback.xml
+  level:
+    org:
+      springframework:
+        security: DEBUG
+paypal:
+  mode: sandbox
+  redirect:
+    success:
+      url: http://localhost:4200/#/souscription/paiement/success?transactionId=%s
+    cancel:
+      url: http://localhost:4200/#/souscription/paiement/cancel?transactionId=%s
+  client:
+    secret: EBN7rMnc3RptSIePRsfzXbpZJM0R637P3iREGfVyGMTpgqS8eeDhpmknIzR1EQQrH1DGbwiKmVnF7yHz
+    id: AXavmSy8xVLFKQzgPgwouxRdnn50B603lp1D-u5sILXhs5o57a5PwJnsBJUi8r40SydXe7lzNDR16avf
+file:
+  encoding: UTF-8
+server:
+  port: '8075'

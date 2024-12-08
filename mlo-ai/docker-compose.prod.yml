@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+
+  mlo_frontend:
+    container_name: ${FRONTEND_CONTAINER_NAME}
+    image: florian06/mlo-backend:1.1
+    restart: always
+    ports:
+      - "${FRONTEND_PORT_EXTERNAL}:80"
+
+  mlo_backend:
+    container_name: ${BACKEND_CONTAINER_NAME}
+    image: florian06/mlo-backend:1.1
+    restart: always
+    volumes:
+      - ./properties/application-backend.yml:/devops/properties/application-backend.yml
+    depends_on:
+      - ${POSTGRES_CONTAINER_NAME}
+    ports:
+      - "${BACKEND_PORT_EXTERNAL}:${BACKEND_PORT_INTERNAL}"
+    environment:
+      - DB_USERNAME=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - BACKEND_PORT=${BACKEND_PORT_INTERNAL}
+      - DB_HOST=${POSTGRES_CONTAINER_NAME}
+      - DB_NAME=${POSTGRES_DB}
+      - AUTH_URL=${AUTH_SERVICE_CONTAINER_NAME}
+      - AUTH_PORT=${AUTH_PORT_INTERNAL}
+
+networks:
+  default:
+    external:
+      name: shared_network
