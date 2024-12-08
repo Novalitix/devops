@@ -25,7 +25,7 @@ services:
       - BD_USER=${MYSQL_PASSWORD}
       - BD_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - BD_HOST=${MYSQL_HOSTNAME}
-      - BACKEND_PORT=${BACKEND_PORT_EXTERNAL}
+      - BACKEND_PORT=${BACKEND_PORT_INTERNAL}
 networks:
   default:
     external:
