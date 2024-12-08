@@ -16,18 +16,16 @@ services:
     volumes:
       - ./properties/application-backend.yml:/devops/properties/application-backend.yml
     depends_on:
-      - ${POSTGRES_CONTAINER_NAME}
+      - ${MYSQL_CONTAINER_NAME}
     ports:
       - "${BACKEND_PORT_EXTERNAL}:${BACKEND_PORT_INTERNAL}"
     environment:
-      - DB_USERNAME=${POSTGRES_USER}
-      - DB_PASSWORD=${POSTGRES_PASSWORD}
-      - BACKEND_PORT=${BACKEND_PORT_INTERNAL}
-      - DB_HOST=${POSTGRES_CONTAINER_NAME}
-      - DB_NAME=${POSTGRES_DB}
-      - AUTH_URL=${AUTH_SERVICE_CONTAINER_NAME}
-      - AUTH_PORT=${AUTH_PORT_INTERNAL}
-
+      - DB_NAME=${MYSQL_HOSTNAME}
+      - DB_PORT=${MYSQL_HOST_PORT}
+      - DB_USERNAME=${MYSQL_PASSWORD}
+      - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - DB_HOST=${MYSQL_HOSTNAME}
+      - BACKEND_PORT=${BACKEND_PORT_EXTERNAL}
 networks:
   default:
     external:

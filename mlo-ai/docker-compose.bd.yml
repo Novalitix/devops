@@ -1,20 +1,38 @@
 version: '3.8'
 services:
+#  mlo-mysql:
+#    image: mysql:5.6
+#    container_name: mlo-mysql
+#    ports:
+#      - 3316:3316
+#    environment:
+#      MYSQL_ROOT_PASSWORD: Root123456*
+#      MYSQL_PASSWORD: root
+#      MYSQL_TCP_PORT: 3316
+#    restart: unless-stopped
+#    volumes:
+#      - ../../mysql/mlo/var/data/mysql:/var/lib/mysql
+#      - ../../mysql/mlo/config/mysql:/etc/mysql
+#      - ../../mysql/mlo/var/log/mysql:/var/log/mysql
+#    hostname: mlo-mysql
+#    networks:
+#      mlo_network:
+
   mlo-mysql:
     image: mysql:5.6
-    container_name: mlo-mysql
+    container_name: ${MYSQL_CONTAINER_NAME}
     ports:
-      - 3316:3316
+      - "${MYSQL_HOST_PORT}:${MYSQL_CONTAINER_PORT}"
     environment:
-      MYSQL_ROOT_PASSWORD: Root123456*
-      MYSQL_PASSWORD: root
-      MYSQL_TCP_PORT: 3316
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_TCP_PORT: ${MYSQL_CONTAINER_PORT}
     restart: unless-stopped
     volumes:
-      - ../../mysql/mlo/var/data/mysql:/var/lib/mysql
-      - ../../mysql/mlo/config/mysql:/etc/mysql
-      - ../../mysql/mlo/var/log/mysql:/var/log/mysql
-    hostname: mlo-mysql
+      - ${MYSQL_DATA_VOLUME}:/var/lib/mysql
+      - ${MYSQL_CONFIG_VOLUME}:/etc/mysql
+      - ${MYSQL_LOG_VOLUME}:/var/log/mysql
+    hostname: ${MYSQL_HOSTNAME}
     networks:
       mlo_network:
 

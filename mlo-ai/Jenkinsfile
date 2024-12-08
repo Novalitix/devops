@@ -2,18 +2,18 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY = 'registry.iforce5demo.com'
+        REGISTRY = 'florian06'
         DOCKER_CREDENTIALS_ID = 'DOCKER_CREDENTIALS_ID' // Utiliser votre identifiant réel Jenkins ici
         VPS_CREDENTIALS_SSH_ID = 'VPS_CREDENTIALS_SSH_ID'       // Utiliser votre identifiant réel Jenkins ici
         VPS_HOST = '193.203.164.15'
-        DOCKER_COMPOSE_PATH = '/root/projets/auroresgt/devops'
+        DOCKER_COMPOSE_PATH = '/root/mlo/devops/mlo'
         GITLAB_CLE = 'GITLAB_CLE'
-        IMAGE_BACKENG = 'sgt_backend'
-        IMAGE_FRONTEND = 'sgt_frontend'
-        IMAGE_AUTH = 'sgt_auth'
-        CONTAINER_BACKENG = 'sgt-backend'
-        CONTAINER_FRONTEND = 'sgt-frontend'
-        CONTAINER_AUTH = 'sgt-auth'
+        IMAGE_BACKENG = 'mlo_backend'
+        IMAGE_FRONTEND = 'mlo_frontend'
+        IMAGE_AUTH = 'mlo_auth'
+        CONTAINER_BACKENG = 'mlo-backend'
+        CONTAINER_FRONTEND = 'mlo-frontend'
+        CONTAINER_AUTH = 'mlo-auth'
         NAME_BRANCH = 'working'
         VERSION = '1.1'
         URL_GITLAB_BACKENG = 'https://gitlab.com/aurore-sgt/backend.git'
@@ -133,7 +133,7 @@ def deployDockerService(serviceName, serviceNameContainer, version) {
     sh "docker push ${REGISTRY}/${serviceName}:${version}"
     echo "Poussée de l'image ${serviceName}:${version} vers le registre Docker OK OK"
 
-    
+
     // Determine the correct service name
     def serviceNameCorrect = sh(
         script: """
@@ -158,7 +158,7 @@ def deployDockerService(serviceName, serviceNameContainer, version) {
         sh """
             ssh -o StrictHostKeyChecking=no root@${VPS_HOST} '
                 cd ${DOCKER_COMPOSE_PATH} &&
-                
+
                 if [ \$(docker ps -a -q -f name=${serviceNameContainer}) ]; then
                     echo "Removing container ${serviceNameContainer}..." &&
                     docker rm -f ${serviceNameContainer};
@@ -168,12 +168,12 @@ def deployDockerService(serviceName, serviceNameContainer, version) {
                     echo "Removing image ${REGISTRY}/${serviceName}:${version}..." &&
                     docker rmi ${REGISTRY}/${serviceName}:${version};
                 fi
-    
+
                 docker compose -f docker-compose.bd.prod.yml -f docker-compose.prod.yml up -d &&
                 docker logs ${serviceNameContainer}
             '
         """
-    } 
+    }
 }
 
 def checkoutFromRepo(repoUrl, branchName, credentialsId) {

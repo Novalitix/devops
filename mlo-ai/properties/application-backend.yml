@@ -39,10 +39,11 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
     show-sql: 'true'
   datasource:
-    password: Root123456*
-    url: jdbc:mysql://localhost:3316/mlo-db6?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://${BD_HOST:mlo-db}:${BD_PORT:3306}/${DB_NAME:mlo-db}?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    password: ${BD_PASSWORD:Root123456*}
+    username: ${BD_USER:root}
     driverClassName: com.mysql.cj.jdbc.Driver
-    username: root
+
   servlet:
     multipart:
       max-request-size: 10MB
@@ -98,4 +99,20 @@ paypal:
 file:
   encoding: UTF-8
 server:
-  port: '8075'
+  port: ${BACKEND_PORT:9000}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
