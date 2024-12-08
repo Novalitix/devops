@@ -29,6 +29,9 @@ spring:
             client-secret: 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
             redirect-uri: http://localhost:8075/login/oauth2/callback/google
             scope: profile, email
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
   jpa:
     hibernate:
       ddl-auto: update
