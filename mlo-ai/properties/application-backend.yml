@@ -42,7 +42,7 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
     show-sql: 'true'
   datasource:
-    url: jdbc:mysql://${BD_HOST:mlo-db}:${BD_PORT:3306}/${DB_NAME:mlo-db}?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://${BD_HOST:mlo-mysql}:${BD_PORT:3306}/${BD_NAME:mlo-db}?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
     password: ${BD_PASSWORD:Root123456*}
     username: ${BD_USER:root}
     driverClassName: com.mysql.cj.jdbc.Driver
