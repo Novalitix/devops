@@ -37,5 +37,5 @@ services:
       mlo_network:
 
 networks:
-  shared_network:
+  mlo_network:
     external: true
