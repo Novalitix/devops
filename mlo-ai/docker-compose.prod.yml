@@ -14,7 +14,7 @@ services:
     image: florian06/mlo-backend:1.1
     restart: always
     volumes:
-      - ./properties/application-backend.yml:/devops/properties/application-backend.yml
+      - ./properties/application-backend.yml:/devops/application-backend.yml
     depends_on:
       - ${MYSQL_CONTAINER_NAME}
     ports:
