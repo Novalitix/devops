@@ -4,7 +4,7 @@ services:
 
   mlo_frontend:
     container_name: ${FRONTEND_CONTAINER_NAME}
-    image: florian06/mlo-backend:1.1
+    image: florian06/mlo-frontend:1.1
     restart: always
     ports:
       - "${FRONTEND_PORT_EXTERNAL}:80"
