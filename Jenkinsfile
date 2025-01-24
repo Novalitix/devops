@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         REGISTRY = 'florian06'
-        DOCKER_CREDENTIALS_ID = 'DOCKER_CREDENTIALS_ID' // Utiliser votre identifiant réel Jenkins ici
+        DOCKER_CREDENTIALS_ID = 'Novalitix_Github_Token' // Utiliser votre identifiant réel Jenkins ici
         VPS_CREDENTIALS_SSH_ID = 'VPS_CREDENTIALS_SSH_ID'       // Utiliser votre identifiant réel Jenkins ici
         VPS_HOST = '37.27.13.174'
         DOCKER_COMPOSE_PATH = '/root/devops/devops/mlo-ai'
